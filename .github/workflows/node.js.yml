@@ -38,7 +38,7 @@ jobs:
             houwayda/test:${{ github.sha }} 
             
           # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
           
            
           
