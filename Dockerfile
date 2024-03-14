@@ -1,20 +1,23 @@
-# Use official Node.js image as base
-FROM node:20
+FROM node:20 as build-step
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json (if present)
-COPY package*.json ./
+COPY package.json /app/
 
-# Install dependencies
-RUN npm install
+RUN npm i
 
-# Copy the rest of the application code
-COPY . .
+COPY . /app
 
-# Expose the port the app runs on
-EXPOSE 3000
+RUN npm run build
 
-# Command to run the application
-CMD ["node", "app.js"]
+# ========================================
+# NGINX STAGE
+# ========================================
+
+FROM nginx:1.23-alpine 
+
+WORKDIR /usr/share/nginx/html/
+
+COPY --from=build-step /app/build ./
+
+CMD [ "nginx", "-g", "daemon off;" ]
