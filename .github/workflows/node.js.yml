@@ -34,7 +34,7 @@ jobs:
           name: houwayda/test
           context: ./
           tags: |
-            houwayda9/projet99:${{ github.sha }} 
+            houwayda/test:${{ github.sha }} 
           
            
           
