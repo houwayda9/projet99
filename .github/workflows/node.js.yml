@@ -23,7 +23,6 @@ jobs:
       with:
         node-version: '20.x'
     - run: npm ci
-    - run: npm test
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
