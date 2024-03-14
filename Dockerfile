@@ -1,12 +1,12 @@
 FROM node:20 as build-step
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json /app/
+COPY package*.json ./
 
 RUN npm i
 
-COPY . /app
+COPY . .
 
 RUN npm run build
 
