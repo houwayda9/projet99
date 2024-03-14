@@ -60,15 +60,15 @@ jobs:
         with:
           repository: houwayda9/argorepo
           ref: 'main'
-          token: ${{ secrets.G_TOKEN }}
+          token: ${{ secrets.G_TOKEN2 }}
       - name: setup git config
         run: |
           git config --global user.email ${{ secrets.USER_EMAIL }}
           git config --global user.name ${{ secrets.USER_NAME }}
           echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/test:ad5b949eb02016589d0ff6bc1fd17d5d2dba2ce3 #g" deployment.yaml
+          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/test:7833b76ee13a82c048ec0b7b7433fac5206b1f76 #g" deployment.yaml
           git add -A
-          git commit -am "Update image for - ad5b949eb02016589d0ff6bc1fd17d5d2dba2ce3"
+          git commit -am "Update image for - 7833b76ee13a82c048ec0b7b7433fac5206b1f76"
       - run: echo ${{ github }}
       - run: git push origin main
       
