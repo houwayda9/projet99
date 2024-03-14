@@ -27,7 +27,7 @@ jobs:
         name: houwayda/test
         registry: docker.io
         context: ./
-        tags: ${{ github.sha }}
+        tags: ${{ github.actor }}/projet99:${{ github.sha }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
