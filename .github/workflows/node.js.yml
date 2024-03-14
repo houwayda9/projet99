@@ -32,7 +32,7 @@ jobs:
           context: ./
           tags: |
             houwayda9/projet99:${{ github.sha }} 
-            push: ${{ github.ref == 'refs/heads/main' }}
+            push: ${{ github.ref == 'refs/heads/main' }} 
            
           
     
