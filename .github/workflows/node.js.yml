@@ -66,9 +66,9 @@ jobs:
           git config --global user.email ${{ secrets.USER_EMAIL }}
           git config --global user.name ${{ secrets.USER_NAME }}
           echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#houwayda/test:35b21729df662bc555fb9036851fc9fe7c43c77f #g" deployment.yaml
+          sed -i "s#${{ github.actor }}.*#houwayda/test:b4f925d9f1e6e5e2b1b53ac74066e06e31deb94c#g" deployment.yaml
           git add -A
-          git commit -am "Update image for - 35b21729df662bc555fb9036851fc9fe7c43c77f"
+          git commit -am "Update image for - b4f925d9f1e6e5e2b1b53ac74066e06e31deb94c"
       - run: echo ${{ github }}
       - run: git push origin main
       
