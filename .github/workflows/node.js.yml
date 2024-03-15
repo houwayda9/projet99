@@ -22,7 +22,7 @@ jobs:
     
  
   build-and-push-docker-image :
-    name: connect to docker
+    name: login to dockerhub and push images
     runs-on: ubuntu-latest
     needs: ['build']
     steps:
@@ -43,11 +43,9 @@ jobs:
           # Note: tags has to be all lower-case
           tags: |
             houwayda/test:${{ github.sha }} 
-            
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
-     - name: Image digest
-       run: echo ${{ steps.docker_build.outputs.digest }}
+     
   update-manifest-stage:
      runs-on: ubuntu-latest
      needs: ['build-and-push-docker-image']
