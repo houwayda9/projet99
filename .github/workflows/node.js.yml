@@ -67,6 +67,11 @@ jobs:
           sed -i "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g" deployment.yaml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
+      - name: "Update Deployment Image Tag" # [3]
+        working-directory: "kustomize"
+        run: |
+         kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
+
       - run: echo ${{ github }}
       - run: git push origin main
       
