@@ -68,6 +68,12 @@ jobs:
           sed -i "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g" deployment.yaml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
+ 
+  
+  update-kustomize-file:
+     runs-on: ubuntu-latest
+     needs: ['build-and-push-docker-image']
+     steps:
       - name: Checkout another repository
         uses: actions/checkout@v2
         with:
@@ -82,6 +88,7 @@ jobs:
             tar -xzvf kustomize.tar.gz
             sudo mv kustomize /usr/local/bin/
             kustomize edit set image react-app = "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g"
+            cat kustomazition.yaml
             git add -A
             git commit -am "Update image for - ${{ github.sha }}"
             git push origin main
