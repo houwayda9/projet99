@@ -79,8 +79,8 @@ jobs:
             wget -O kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.4.0/kustomize_v4.4.0_linux_amd64.tar.gz
             tar -xzvf kustomize.tar.gz
             sudo mv kustomize /usr/local/bin/
-            kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
-            kustomize build houwayda9/kustomize > kustomization.yaml
+            kustomize edit set image react-app = "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g"
+            
           
      
       
