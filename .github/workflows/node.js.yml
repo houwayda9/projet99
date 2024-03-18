@@ -91,6 +91,7 @@ jobs:
             sudo mv kustomize /usr/local/bin/
             kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
             cat kustomazition.yaml
+            sed -i "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g" kustomazition.yaml
             git add -A
             git commit -am "Update image for - ${{ github.sha }}"
             echo ${{ github }}
