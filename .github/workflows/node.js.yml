@@ -91,7 +91,7 @@ jobs:
             sudo mv kustomize /usr/local/bin/
             cat kustomazition.yaml
             sed -i 's/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g'|' kustomize/base/kustomization.yaml
-            git add -A
+            git add kustomize/base/kustomization.yaml
             git commit -am "Update image for - ${{ github.sha }}"
             echo ${{ github }}
             git push origin main
