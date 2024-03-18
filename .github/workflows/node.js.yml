@@ -22,6 +22,7 @@ jobs:
     
 
 
+
  
   build-and-push-docker-image :
     name: login to DockerHub and push image to repositorie
