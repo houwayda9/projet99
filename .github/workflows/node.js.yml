@@ -75,8 +75,9 @@ jobs:
           sudo mv kustomize /usr/local/bin/
       
       - name: "Update Deployment Image Tag" # [3]
-        working-directory: "kustomize/kustomize/base"
+        
         run: |
+         cd kustomize/kustomize/base
          kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
 
       - run: echo ${{ github }}
