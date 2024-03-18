@@ -68,7 +68,7 @@ jobs:
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
       - name: "Update Deployment Image Tag" # [3]
-        working-directory: "kustomize"
+        working-directory: "kustomize/kustomize/base"
         run: |
          kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
 
