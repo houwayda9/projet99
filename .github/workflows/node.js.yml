@@ -86,13 +86,10 @@ jobs:
           run: |
             git config --global user.email ${{ secrets.USER_EMAIL }}
             git config --global user.name ${{ secrets.USER_NAME }}
-            wget -O kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.4.0/kustomize_v4.4.0_linux_amd64.tar.gz
-            tar -xzvf kustomize.tar.gz
-            sudo mv kustomize /usr/local/bin/
-            cat kustomazition.yaml
+    
             sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomize/base/kustomization.yaml
             git add kustomize/base/kustomization.yaml
-            git commit -am "Update image for - ${{ github.sha }}"
+            git commit -m "Update image for - ${{ github.sha }}"
             echo ${{ github }}
             git push origin main
             
