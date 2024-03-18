@@ -68,6 +68,8 @@ jobs:
           sed -i "s/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g" deployment.yaml
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
+          echo ${{ github }}
+          git push origin main
  
   
   update-kustomize-file:
@@ -91,16 +93,12 @@ jobs:
             cat kustomazition.yaml
             git add -A
             git commit -am "Update image for - ${{ github.sha }}"
+            echo ${{ github }}
             git push origin main
             
           
      
-      
-      
-    
 
-      - run: echo ${{ github }}
-      - run: git push origin main
       
           
            
