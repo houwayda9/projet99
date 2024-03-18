@@ -20,6 +20,7 @@ jobs:
         node-version: '16.x'
     - run: npm ci
     
+
  
   build-and-push-docker-image :
     name: login to DockerHub and push image to repositorie
