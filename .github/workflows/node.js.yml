@@ -80,6 +80,7 @@ jobs:
             tar -xzvf kustomize.tar.gz
             sudo mv kustomize /usr/local/bin/
             kustomize edit set image react-app = image:houwayda/test:${{ github.sha }}
+            kustomize build houwayda9/kustomize > kustomization.yaml
           
      
       
