@@ -90,7 +90,7 @@ jobs:
             tar -xzvf kustomize.tar.gz
             sudo mv kustomize /usr/local/bin/
             cat kustomazition.yaml
-            sed -i 's/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g'|' kustomize/base/deployment.yaml
+            sed -i 's/houwayda\/test:\(.*\)/houwayda\/test:${{ github.sha }}/g'|' kustomize/base/kustomization.yaml
             git add -A
             git commit -am "Update image for - ${{ github.sha }}"
             echo ${{ github }}
