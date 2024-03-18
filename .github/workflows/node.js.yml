@@ -84,13 +84,12 @@ jobs:
           token: ${{ secrets.G_TOKEN3 }}
           working-directory: houwayda9/kustomize/base
           run: |
+            cd kustomize/base
             git config --global user.email ${{ secrets.USER_EMAIL }}
             git config --global user.name ${{ secrets.USER_NAME }}
-    
-            sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomize/base/kustomization.yaml
-            git add kustomize/base/kustomization.yaml
+            sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomization.yaml
+            git add kustomization.yaml
             git commit -m "Update image for - ${{ github.sha }}"
-            echo ${{ github }}
             git push origin main
             
           
