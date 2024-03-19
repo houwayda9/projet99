@@ -73,7 +73,7 @@ jobs:
           git add -A
           git commit -am "Update image for - ${{ github.sha }}"
           echo ${{ github }}
-          git push origin main
+          git push origin staging
  
   
   update-kustomize-file:
