@@ -82,8 +82,8 @@ jobs:
           repository: houwayda9/kustomize
           ref: main 
           token: ${{ secrets.G_TOKEN3 }}
+          path: houwayda9/kustomize/kustomize/base
           run: |
-            cd kustomize/base
             git config --global user.email ${{ secrets.USER_EMAIL }}
             git config --global user.name ${{ secrets.USER_NAME }}
             sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomization.yaml
