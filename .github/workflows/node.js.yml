@@ -88,7 +88,7 @@ jobs:
          cd houwayda9/kustomize/kustomize
          ls -l  # Check if kustomization.yaml exists and its type
          cd base
-         sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomization.yaml
+         sed -i "s|newTag: .*|newTag: ${{ github.sha }}|" kustomization.yaml 
          cat kustomization.yaml
          ls -l
       - name: Update Kustomize file
