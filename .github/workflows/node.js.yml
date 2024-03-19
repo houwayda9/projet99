@@ -91,7 +91,7 @@ jobs:
       - name: Debug
         run: |
          cd houwayda9/kustomize/kustomize
-         ls -l  # Check if kustomization.yaml exists and its type
+         ls -l  
          cd base
          sed -i "s|newTag: .*|newTag: ${{ github.sha }}|" kustomization.yaml 
          cat kustomization.yaml
