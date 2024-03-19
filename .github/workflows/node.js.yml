@@ -5,7 +5,9 @@ name: Build step
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+     - main
+     - staging
   pull_request:
     branches: [ "main" ]
 
@@ -92,6 +94,7 @@ jobs:
          cat kustomization.yaml
          ls -l
       - name: Update Kustomize file
+        if: github.ref == 'refs/heads/main'
         run: |
             pwd
             cd houwayda9/kustomize/kustomize/base
