@@ -93,7 +93,6 @@ jobs:
             new_content=$(echo "${content}" | sed "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|")
             echo "${new_content}" > kustomization.yaml
             git add kustomization.yaml
-            cat kustomization.yaml
             git commit -m "Update image for - ${{ github.sha }}"
             git push origin main
             
