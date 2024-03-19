@@ -82,12 +82,13 @@ jobs:
           repository: houwayda9/kustomize
           ref: main 
           token: ${{ secrets.G_TOKEN3 }}
-          path: kustomize/base/
+          path: houwayda9/kustomize 
       - name: Debug
         run: |
-         cd kustomize/base
-         ls -l kustomization.yaml  # Check if kustomization.yaml exists and its type
-         cat kustomization.yaml 
+         cd houwayda9/kustomize/kustomize
+         ls -l  # Check if kustomization.yaml exists and its type
+         cd base
+         ls -l
       - name: Update Kustomize file
         run: |
             pwd
