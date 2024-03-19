@@ -85,13 +85,13 @@ jobs:
           path: houwayda9/kustomize/kustomize/base/
       - name: Debug
         run: |
-         cd houwayda9/kustomize/base
+         cd kustomize/base
          ls -l kustomization.yaml  # Check if kustomization.yaml exists and its type
          cat kustomization.yaml 
       - name: Update Kustomize file
         run: |
             pwd
-            cd houwayda9/kustomize/base
+            cd kustomize/base
             git config --global user.email ${{ secrets.USER_EMAIL }}
             git config --global user.name ${{ secrets.USER_NAME }}
             content=$(cat kustomization.yaml)
