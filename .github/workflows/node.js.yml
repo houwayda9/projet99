@@ -82,7 +82,7 @@ jobs:
           repository: houwayda9/kustomize
           ref: main 
           token: ${{ secrets.G_TOKEN3 }}
-          path: houwayda9/kustomize/kustomize/base/
+          path: kustomize/base/
       - name: Debug
         run: |
          cd kustomize/base
