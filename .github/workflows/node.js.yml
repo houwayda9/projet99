@@ -79,7 +79,7 @@ jobs:
       - name: Checkout another repository
         uses: actions/checkout@v2
         with:
-          repository: houwayda9/kustomize/
+          repository: houwayda9/kustomize
           ref: main 
           token: ${{ secrets.G_TOKEN3 }}
           run: |
