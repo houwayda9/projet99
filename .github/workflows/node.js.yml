@@ -89,6 +89,7 @@ jobs:
             git config --global user.name ${{ secrets.USER_NAME }}
             sed -i "s|image: houwayda/test:.*|image: docker.io/houwayda/test:${{ github.sha }}|" kustomization.yaml
             git add kustomization.yaml
+            cat kustomization.yaml
             git commit -m "Update image for - ${{ github.sha }}"
             git push origin main
             
