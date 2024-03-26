@@ -78,6 +78,7 @@ jobs:
           # Note: tags has to be all lower-case
           tags: |
             houwayda/prod:${{ github.sha }} 
+          push: ${{ github.ref == 'refs/heads/prod' }}
             
           # build on feature branches, push only on dev branch or prod
           
