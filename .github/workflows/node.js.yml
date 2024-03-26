@@ -54,8 +54,36 @@ jobs:
           # build on feature branches, push only on dev branch or prod
           push: ${{ github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stagging'  }}
 
+  buid-and-push-image-prod:
+     runs-on: ubuntu-latest 
+     needs: ['build']
+     environment: prod
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+   
+    
+      - name: Build image and push to Docker Hub 
+        uses: docker/build-push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./
+          # Note: tags has to be all lower-case
+          tags: |
+            houwayda/prod:${{ github.sha }} 
+            
+          # build on feature branches, push only on dev branch or prod
+          push: ${{ github.ref == 'refs/heads/prod'}}
+        
      
+  
        
+  
   update-manifest-stage:
      if: github.ref == 'refs/heads/stagging'
      runs-on: ubuntu-latest
