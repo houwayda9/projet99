@@ -181,7 +181,7 @@ jobs:
         with:
           repository: houwayda9/kustomize
           ref: main
-          token: ${{ secrets.G_TOKEN3 }}
+          token: ${{ secrets.G_TOKEN }}
           path: houwayda9/kustomize 
       - name: Debug
         run: |
