@@ -80,7 +80,7 @@ jobs:
             houwayda/prod:${{ github.sha }} 
             
           # build on feature branches, push only on dev branch or prod
-          push: ${{ github.ref == 'refs/heads/prod'}}
+          
         
      
   
