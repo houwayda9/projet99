@@ -49,7 +49,7 @@ jobs:
         run: |
           current_tag="${{ steps.latest_tag.outputs.TAG }}"
           IFS='.' read -r -a version_parts <<< "${current_tag#v}"
-          next_patch=$((version_parts[2] + 1))
+          next_patch=$((version_parts[1] + 1))
           next_version="v${version_parts[0]}.${version_parts[1]}.$next_patch"
           echo "::set-output name=VERSION::$next_version"
 
