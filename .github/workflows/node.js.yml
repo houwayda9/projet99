@@ -67,13 +67,16 @@ jobs:
       - name: Determine next version
         id: next_version
         run: |
-         if git describe --tags --abbrev=0 >/dev/null 2>&1; then
+          if git describe --tags --abbrev=0 >/dev/null 2>&1; then
            VERSION=$(git describe --tags --abbrev=0 | awk -F '[-.]' '{print $1"."$2"."$3+1}')
-           echo "::set-output name=VERSION::$VERSION"
-         else
-          echo "::set-output name=VERSION::v1.0.1"  # Set a default version if no tags are found
-         fi
-           
+          else
+           LAST_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+           LAST_VERSION=${LAST_VERSION#v}  # Remove leading 'v'
+           IFS='.' read -r -a version_parts <<< "$LAST_VERSION"
+           VERSION="v${version_parts[0]}.${version_parts[1]}.$((${version_parts[2]} + 1))"
+          fi
+          echo "::set-output name=VERSION::$VERSION"
+
       - name: Push to another repository (prod)
         if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
         run: |
