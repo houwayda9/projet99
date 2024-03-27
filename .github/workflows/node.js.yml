@@ -38,6 +38,9 @@ jobs:
      steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Get the latest tag
+        id: latest_tag
+        run: echo "::set-output name=TAG::v1.0.$(git rev-list --count HEAD)"
      
 
       - name: Login to DockerHub
