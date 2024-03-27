@@ -29,7 +29,6 @@ jobs:
 
  
   build-and-push-docker-image :
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stagging'
     name: login to DockerHub and push image to repositorie
     runs-on: ubuntu-latest
     needs: ['build']
