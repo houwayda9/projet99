@@ -42,6 +42,10 @@ jobs:
       - name: Get the latest tag
         id: latest_tag
         run: echo "::set-output name=TAG::v1.0.$(git rev-list --count HEAD)"
+      - name: Determine next version
+        id: next_version
+        run: echo "::set-output name=VERSION::v$(echo ${TAG:1} | awk -F. '{$NF++; print}' OFS=.)"
+
      
 
       - name: Login to DockerHub
@@ -64,7 +68,7 @@ jobs:
         with:
           context: ./
           tags: |
-            houwayda/prod:${{ steps.latest_tag.outputs.TAG }}
+            houwayda/prod:${{ steps.next_version.outputs.VERSION }}
           push: true
 
  
