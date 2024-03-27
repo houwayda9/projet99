@@ -63,7 +63,7 @@ jobs:
         with:
           context: ./
           tags: |
-            houwayda/prod:v1.0.$(git rev-list --count HEAD)
+            houwayda/prod:${{ steps.latest_tag.outputs.TAG }}
           push: true
 
  
