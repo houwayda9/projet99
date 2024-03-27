@@ -87,7 +87,6 @@ jobs:
               ;;
             "refs/heads/prod")
               overlay_dir="prod"
-              export ENVIRONMENT="prod"
               ;;
             "refs/heads/satgging")
               overlay_dir="satgging"
@@ -99,7 +98,6 @@ jobs:
           esac
           
           cd houwayda9/kustomize/kustomize/overlays/${overlay_dir}
-          echo "${{ vars.PORT }}"
           sed -i "s|newTag: .*|newTag: ${{ github.sha }}|" kustomization.yaml 
           git config --global user.email ${{ secrets.USER_EMAIL }}
           git config --global user.name ${{ secrets.USER_NAME }}
