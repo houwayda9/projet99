@@ -45,25 +45,19 @@ jobs:
 
       - name: Build image and push to Docker Hub 
         uses: docker/build-push-action@v2
+        if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stagging'  
         with:
-        # relative path to the place where source code with Dockerfile is located
           context: ./
-        # Note: tags has to be all lower-case
           tags: |
             houwayda/test:${{ github.sha }}
-        # Build on feature branches, push only on specific branches
-          push: ${{ github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/stagging'  }}
-
-      - name: Push to another repository (only for prod branch)
+          push: true
+      - name: Push to another repository (prod)
         uses: docker/build-push-action@v2
         if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
         with:
-        # relative path to the place where source code with Dockerfile is located
           context: ./
-        # Note: tags has to be all lower-case
           tags: |
             houwayda/prod:${{ github.sha }}
-        # Build on feature branches, push only on specific branches
           push: true
 
  
