@@ -66,17 +66,19 @@ jobs:
       - name: Determine next version
         id: next_version
         run: |
-          VERSION=$(git describe --tags --abbrev=0 | awk -F '[-.]' '{print $1"."$2"."$3+1}')
-          echo "::set-output name=VERSION::$VERSION"
+         if git describe --tags --abbrev=0 >/dev/null 2>&1; then
+           VERSION=$(git describe --tags --abbrev=0 | awk -F '[-.]' '{print $1"."$2"."$3+1}')
+           echo "::set-output name=VERSION::$VERSION"
+         else
+          echo "::set-output name=VERSION::v1.0.1"  # Set a default version if no tags are found
+         fi
            
       - name: Push to another repository (prod)
-        uses: docker/build-push-action@v2
         if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
-        with:
-          context: ./
-          tags: |
-            houwayda/prod:${{ steps.next_version.outputs.VERSION }}
-          push: true
+        run: |
+          TAG_NAME="houwayda/prod:${{ steps.next_version.outputs.VERSION }}"
+          docker build -t "$TAG_NAME" .
+          docker push "$TAG_NAME"
 
  
           
