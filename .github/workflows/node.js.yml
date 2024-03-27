@@ -41,6 +41,15 @@ jobs:
      steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+     
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Get the latest tag
         id: latest_tag
         run: echo "::set-output name=TAG::$(git describe --abbrev=0 --tags)"
@@ -49,17 +58,10 @@ jobs:
         run: |
           current_tag="${{ steps.latest_tag.outputs.TAG }}"
           IFS='.' read -r -a version_parts <<< "${current_tag#v}"
-          next_patch=$((version_parts[1] + 1))
+          next_patch=$((version_parts[2] + 1))
           next_version="v${version_parts[0]}.${version_parts[1]}.$next_patch"
           echo "::set-output name=VERSION::$next_version"
 
-     
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image and push to Docker Hub 
         uses: docker/build-push-action@v2
@@ -75,7 +77,7 @@ jobs:
         with:
           context: ./
           tags: |
-            houwayda/prod:${{ steps.next_version.outputs.VERSION }}
+            houwayda/prood:${{ steps.next_version.outputs.VERSION }}
           push: true
 
  
