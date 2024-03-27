@@ -53,9 +53,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      
+build-and-push-docker-image:
+     
+     name: login to DockerHub and push image to repository
+     runs-on: ubuntu-latest
+     needs: ['build']
+     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+     
 
-
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image and push to Docker Hub 
         uses: docker/build-push-action@v2
@@ -65,31 +77,19 @@ jobs:
           tags: |
             houwayda/test:${{ github.sha }}
           push: true
-      - name: Determine next version
-        id: next_version
-        run: |
-          if git describe --tags --abbrev=0 >/dev/null 2>&1; then
-            LAST_VERSION=$(git describe --tags --abbrev=0)
-            SEMVER_REGEX="v([0-9]+)\.([0-9]+)\.([0-9]+)"
-            if [[ $LAST_VERSION =~ $SEMVER_REGEX ]]; then
-              MAJOR="${BASH_REMATCH[1]}"
-              MINOR="${BASH_REMATCH[2]}"
-              PATCH="${BASH_REMATCH[3]}"
-              NEXT_VERSION="v$MAJOR.$MINOR.$((PATCH + 1))"
-            else
-              NEXT_VERSION="v0.1.0"  # Initial version if no tags exist
-            fi
-          else
-            NEXT_VERSION="v0.1.0"  # Initial version if no tags exist
-          fi
-          echo "::set-output name=VERSION::$NEXT_VERSION"
-
       - name: Push to another repository (prod)
+        uses: docker/build-push-action@v2
         if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
-        run: |
-          TAG_NAME="houwayda/prod:${{ steps.next_version.outputs.NEXT_VERSION }}"
-          docker build -t "$TAG_NAME" .
-          docker push "$TAG_NAME"
+        with:
+          context: ./
+          tags: |
+            houwayda/prod:${{ github.sha }}
+          push: true
+
+
+
+      
+       
 
  
           
