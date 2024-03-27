@@ -75,7 +75,7 @@ jobs:
         with:
           context: ./
           tags: |
-            houwayda/prood:${{ steps.next_version.outputs.VERSION }}
+            houwayda/prod:${{ steps.next_version.outputs.VERSION }}
           push: true
 
  
